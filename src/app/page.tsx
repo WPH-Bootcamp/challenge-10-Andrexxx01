@@ -7,19 +7,32 @@
  * - Handle loading dan error states
  */
 
-export default function Home() {
+import RecommendedList from "@/components/home/recommendedList";
+import MostLikedList from "@/components/home/mostLikedList";
+
+export default function HomePage() {
   return (
-    <div className="min-h-screen">
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Blog App Challenge</h1>
-        
-        {/* TODO: Implement blog posts list here */}
-        <div className="space-y-4">
-          <p className="text-gray-600">
-            Mulai implementasi homepage di sini sesuai dengan design Figma!
-          </p>
+    <>
+      <main className="mx-auto max-w-7xl px-s-4xl py-s-6xl">
+        {/* TITLE */}
+        <h1 className="mb-s-6xl text-display-sm font-bold">
+          Recommend For You
+        </h1>
+
+        {/* CONTENT */}
+        <div className="flex gap-s-6xl">
+          {/* LEFT CONTENT */}
+          <div className="flex-1">
+            <RecommendedList />
+          </div>
+
+          {/* RIGHT SIDEBAR (DESKTOP ONLY) */}
+          <div className="hidden md:block w-[320px] border-l border-neutral-200 pl-s-6xl">
+            <MostLikedList />
+          </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }
+

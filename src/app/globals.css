@@ -1,26 +1,222 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ================= COLORS ================= */
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-neutral-25: #fdfdfd;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e9eaeb;
+  --color-neutral-300: #d5d7da;
+  --color-neutral-400: #a4a7ae;
+  --color-neutral-500: #717680;
+  --color-neutral-600: #535862;
+  --color-neutral-700: #414651;
+  --color-neutral-800: #252b37;
+  --color-neutral-900: #181d27;
+  --color-neutral-950: #0a0d12;
+
+  --color-primary-100: #e5f4fb;
+  --color-primary-200: #6fcfff;
+  --color-primary-300: #0093dd;
+  --color-primary-400: #050a1b;
+
+  /* ================= SPACING ================= */
+  --spacing-s-none: 0px;
+  --spacing-s-xxs: 2px;
+  --spacing-s-xs: 4px;
+  --spacing-s-sm: 6px;
+  --spacing-s-md: 8px;
+  --spacing-s-lg: 12px;
+  --spacing-s-xl: 16px;
+  --spacing-s-2xl: 20px;
+  --spacing-s-3xl: 24px;
+  --spacing-s-4xl: 32px;
+  --spacing-s-5xl: 40px;
+  --spacing-s-6xl: 48px;
+  --spacing-s-7xl: 64px;
+  --spacing-s-8xl: 80px;
+  --spacing-s-9xl: 96px;
+  --spacing-s-10xl: 128px;
+  --spacing-s-11xl: 140px;
+
+  /* ================= TYPOGRAPHY ================= */
+  --text-xs: 12px;
+  --text-xs--line-height: 24px;
+  --text-xs--tracking-tight: -0.03em;
+
+  --text-sm: 14px;
+  --text-sm--line-height: 28px;
+  --text-sm--tracking-tight: -0.03em;
+
+  --text-md: 16px;
+  --text-md--line-height: 30px;
+  --text-md--tracking-tight: -0.03em;
+
+  --text-lg: 18px;
+  --text-lg--line-height: 32px;
+  --text-lg--tracking-tight: -0.03em;
+
+  --text-xl: 20px;
+  --text-xl--line-height: 34px;
+  --text-xl--tracking-tight: -0.03em;
+
+  --text-display-xs: 24px;
+  --text-display-xs--line-height: 36px;
+  --text-display-xs--tracking-tight: -0.03em;
+
+  --text-display-sm: 28px;
+  --text-display-sm--line-height: 38px;
+  --text-display-sm--tracking-tight: -0.03em;
+
+  --text-display-md: 32px;
+  --text-display-md--line-height: 40px;
+  --text-display-md--tracking-tight: -0.03em;
+
+  --text-display-lg: 36px;
+  --text-display-lg--line-height: 44px;
+  --text-display-lg--tracking-tight: -0.03em;
+
+  --text-display-xl: 40px;
+  --text-display-xl--line-height: 48px;
+  --text-display-xl--tracking-tight: -0.03em;
+
+  --text-display-2xl: 48px;
+  --text-display-2xl--line-height: 60px;
+  --text-display-2xl--tracking-tight: -0.03em;
+
+  --text-display-3xl: 60px;
+  --text-display-3xl--line-height: 72px;
+  --text-display-3xl--tracking-tight: -0.03em;
+
+  /* ================= RADIUS ================= */
+  --radius-none: 0px;
+  --radius-xxs: 2px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+  --radius-full: 9999px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer components {
+
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--text-xs--line-height);
+    letter-spacing: var(--text-xs--tracking-tight);
+  }
+
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
+    letter-spacing: var(--text-sm--tracking-tight);
+  }
+
+  .text-md {
+    font-size: var(--text-md);
+    line-height: var(--text-md--line-height);
+    letter-spacing: var(--text-md--tracking-tight);
+  }
+
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+    letter-spacing: var(--text-lg--tracking-tight);
+  }
+
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+    letter-spacing: var(--text-xl--tracking-tight);
+  }
+
+  .text-display-xs {
+    font-size: var(--text-display-xs);
+    line-height: var(--text-display-xs--line-height);
+    letter-spacing: var(--text-display-xs--tracking-tight);
+  }
+
+  .text-display-sm {
+    font-size: var(--text-display-sm);
+    line-height: var(--text-display-sm--line-height);
+    letter-spacing: var(--text-display-sm--tracking-tight);
+  }
+
+  .text-display-md {
+    font-size: var(--text-display-md);
+    line-height: var(--text-display-md--line-height);
+    letter-spacing: var(--text-display-md--tracking-tight);
+  }
+
+  .text-display-lg {
+    font-size: var(--text-display-lg);
+    line-height: var(--text-display-lg--line-height);
+    letter-spacing: var(--text-display-lg--tracking-tight);
+  }
+
+  .text-display-xl {
+    font-size: var(--text-display-xl);
+    line-height: var(--text-display-xl--line-height);
+    letter-spacing: var(--text-display-xl--tracking-tight);
+  }
+
+  .text-display-2xl {
+    font-size: var(--text-display-2xl);
+    line-height: var(--text-display-2xl--line-height);
+    letter-spacing: var(--text-display-2xl--tracking-tight);
+  }
+
+  .text-display-3xl {
+    font-size: var(--text-display-3xl);
+    line-height: var(--text-display-3xl--line-height);
+    letter-spacing: var(--text-display-3xl--tracking-tight);
+  }
+
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    color: #9ca3af; /* neutral-400 */
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+/* ================= BASE STYLES ================= */
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-neutral-900);
+  @apply font-sans antialiased;
+}
+
+@keyframes wiggle-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-45deg);
+  }
+  50% {
+    transform: rotate(45deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-wiggle {
+  animation: wiggle-rotate 0.5s ease-in-out;
 }
+
