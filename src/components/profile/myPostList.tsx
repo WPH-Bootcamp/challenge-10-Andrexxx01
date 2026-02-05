@@ -7,9 +7,17 @@ import ArticleCard from "@/components/home/articleCard";
 import Button from "@/components/ui/button";
 import type { RootState } from "@/store";
 import type { Article, PaginatedResponse } from "@/types/blog";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import StatisticModal from "./statisticModal";
+import DeletePostModal from "./deletePostModal";
+import { useState } from "react";
 
 export default function MyPostList() {
   const { token } = useSelector((s: RootState) => s.auth);
+  const router = useRouter();
+  const [statPostId, setStatPostId] = useState<number | null>(null);
+  const [deletePostId, setDeletePostId] = useState<number | null>(null);
 
   const { data } = useQuery<PaginatedResponse<Article>>({
     queryKey: ["my-posts"],
@@ -36,10 +44,12 @@ export default function MyPostList() {
           No posts yet, but every great writer starts with the first one.
         </p>
 
-        <Button className="flex w-full md:w-auto items-center justify-center gap-2">
-          <img src="/Write Post Icon.svg" className="h-4 w-4" />
-          Write Post
-        </Button>
+        <Link href="/write-post">
+          <Button className="flex w-full md:w-auto items-center justify-center gap-2 cursor-pointer">
+            <img src="/Write Post Icon.svg" className="h-4 w-4" />
+            Write Post
+          </Button>
+        </Link>
       </div>
     );
   }
@@ -52,10 +62,12 @@ export default function MyPostList() {
           {data.total} Post
         </p>
 
-        <Button className="flex w-full md:w-auto items-center justify-center gap-2">
-          <img src="/Write Post Icon-white.svg" className="h-4 w-4" />
-          Write Post
-        </Button>
+        <Link href="/write-post">
+          <Button className="flex w-full md:w-auto items-center justify-center gap-2 cursor-pointer">
+            <img src="/Write Post Icon-white.svg" className="h-4 w-4" />
+            Write Post
+           </Button>
+        </Link>
       </div>
 
       {/* TOP DIVIDER */}
@@ -70,15 +82,15 @@ export default function MyPostList() {
               showDivider={false}
               actions={
                 <>
-                  <button className="font-medium text-primary-300 underline hover:text-primary-200 cursor-pointer">
+                  <button className="font-medium text-primary-300 underline hover:text-primary-200 cursor-pointer" onClick={() => setStatPostId(article.id)}>
                     Statistic
                   </button>
                   <span className="text-neutral-300">|</span>
-                  <button className="font-medium text-primary-300 underline hover:text-primary-200 cursor-pointer">
+                  <button className="font-medium text-primary-300 underline hover:text-primary-200 cursor-pointer" onClick={() => router.push(`/write-post/${article.id}`)}>
                     Edit
                   </button>
                   <span className="text-neutral-300">|</span>
-                  <button className="font-medium text-red-500 underline hover:text-red-700 cursor-pointer">
+                  <button className="font-medium text-red-500 underline hover:text-red-700 cursor-pointer" onClick={() => setDeletePostId(article.id)}>
                     Delete
                   </button>
                 </>
@@ -92,6 +104,19 @@ export default function MyPostList() {
           </div>
         ))}
       </div>
+      {/* ===== MODALS ===== */}
+      {statPostId && (
+        <StatisticModal
+          postId={statPostId}
+          onClose={() => setStatPostId(null)}
+        />
+      )}
+
+      {deletePostId && (
+        <DeletePostModal
+          postId={deletePostId}
+          onClose={() => setDeletePostId(null)}
+        /> )}
     </>
   );
 }

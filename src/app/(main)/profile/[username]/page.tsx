@@ -30,7 +30,6 @@ export default function ProfilePage() {
 
   return (
     <div className="mx-auto max-w-7xl px-s-4xl py-8">
-      {/* ===== CENTERED CONTENT COLUMN (FIGMA MATCH) ===== */}
       <div className="mx-auto max-w-210">
         {/* ===== PROFILE HEADER ===== */}
         <div className="flex items-center gap-4 border-b border-neutral-200 pb-6">
@@ -47,7 +46,6 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* ===== POST COUNT (ONLY IF EXISTS) ===== */}
         {data.posts.total > 0 && (
           <p className="mt-6 mb-4 font-semibold">{data.posts.total} Post</p>
         )}
@@ -67,7 +65,6 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* ===== ARTICLE LIST (CLEAN DIVIDER) ===== */}
         {hasPosts && (
           <div className="mt-6 flex flex-col gap-s-6xl">
             {posts.map((article: any, index: number) => (

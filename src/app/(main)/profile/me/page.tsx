@@ -8,6 +8,7 @@ import MyPostList from "@/components/profile/myPostList";
 import ChangePasswordForm from "@/components/profile/changePasswordForm";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import EditProfileModal from "@/components/profile/editProfileModal";
 
 type Tab = "post" | "password";
 
@@ -15,6 +16,7 @@ export default function MyProfilePage() {
   const router = useRouter();
   const { user, token } = useSelector((s: RootState) => s.auth);
   const [tab, setTab] = useState<Tab>("post");
+  const [openEditProfile, setOpenEditProfile] = useState(false);
 
   useEffect(() => {
     if (!token) {
@@ -43,12 +45,12 @@ export default function MyProfilePage() {
             </div>
           </div>
 
-          <Link
-            href="/profile/edit"
-            className="text-sm font-semibold text-primary-300"
+          <button
+            onClick={() => setOpenEditProfile(true)}
+            className="text-sm font-semibold text-primary-300 cursor-pointer underline"
           >
             Edit Profile
-          </Link>
+          </button>
         </div>
 
         {/* TABS */}

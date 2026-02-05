@@ -14,15 +14,19 @@ export default function WritePostHeader({ title }: { title: string }) {
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-s-4xl">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 cursor-pointer"
         >
           ←<span className="font-semibold">{title}</span>
         </button>
-
-        <img
+        <div className="flex gap-2">
+          <img
           src={normalizeImageUrl(user?.avatarUrl)}
           className="h-8 w-8 rounded-full object-cover"
-        />
+          />
+          <span className="hidden md:block text-sm font-medium text-neutral-900">
+            {user?.name}
+          </span>  
+        </div>
       </div>
     </header>
   );
