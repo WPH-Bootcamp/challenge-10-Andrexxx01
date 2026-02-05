@@ -24,7 +24,6 @@ export default function RecommendedList() {
 
   if (!data) return null;
 
-  // SIMPAN lastPage PALING BESAR YANG PERNAH ADA
   lastPageRef.current = Math.max(lastPageRef.current, data.lastPage);
 
   return (
@@ -39,7 +38,6 @@ export default function RecommendedList() {
         ))}
       </div>
 
-      {/* ❗ SELALU RENDER */}
       <Pagination
         page={page}
         lastPage={lastPageRef.current}

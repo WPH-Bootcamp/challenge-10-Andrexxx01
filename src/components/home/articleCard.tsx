@@ -3,6 +3,10 @@
 import type { Article } from "@/types/blog";
 import Link from "next/link";
 import { normalizeImageUrl } from "@/lib/normalizeImageUrl";
+import { useState } from "react";
+import axiosInstance from "@/lib/axios";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface Props {
   article: Article;
@@ -11,7 +15,26 @@ interface Props {
 }
 
 export default function ArticleCard({ article, showDivider = true, actions }: Props) {
+  const { token } = useSelector((s: RootState) => s.auth);
+  const [liked, setLiked] = useState<boolean>(false);
+  const [likesCount, setLikesCount] = useState<number>(article.likes);
   const avatarSrc = normalizeImageUrl(article.author.avatarUrl);
+
+  const toggleLike = async () => {
+    if (!token) return;
+
+    // optimistic UI
+    setLiked((prev) => !prev);
+    setLikesCount((prev) => (liked ? prev - 1 : prev + 1));
+
+    try {
+      await axiosInstance.post(`/posts/${article.id}/like`);
+    } catch (err) {
+      setLiked((prev) => !prev);
+      setLikesCount((prev) => (liked ? prev + 1 : prev - 1));
+      console.error("Failed to toggle like");
+    }
+  };
 
   return (
     <div
@@ -83,10 +106,18 @@ export default function ArticleCard({ article, showDivider = true, actions }: Pr
 
             {/* ROW 2: LIKE & COMMENT */}
             <div className="mt-2 flex items-center gap-6 text-neutral-600">
-              <span className="flex items-center gap-1">
-                <img src="/Like Icon.svg" alt="like" className="h-4 w-4" />
-                {article.likes}
-              </span>
+              <button
+                onClick={toggleLike}
+                className={`flex items-center gap-1 text-sm font-medium
+              ${liked ? "text-blue-500" : "text-neutral-500"}
+            `}
+              >
+                <img
+                  src={liked ? "/Like Icon-blue.svg" : "/Like Icon.svg"}
+                  className="h-4 w-4"
+                />
+                {likesCount}
+              </button>
 
               <span className="flex items-center gap-1">
                 <img
@@ -97,7 +128,7 @@ export default function ArticleCard({ article, showDivider = true, actions }: Pr
                 {article.comments}
               </span>
             </div>
-            {/* ===== ACTION SLOT (FIGMA) ===== */}
+            {/* ===== ACTION ===== */}
             {actions && (
               <div className="mt-3 flex items-center gap-2 text-sm">
                 {actions}
