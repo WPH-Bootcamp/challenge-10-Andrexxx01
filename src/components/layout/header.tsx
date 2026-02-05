@@ -138,7 +138,7 @@ export default function Header() {
           /* AFTER LOGIN */
           <div className="hidden md:flex items-center gap-s-xl relative">
             <Link
-              href="#"
+              href="/write-post"
               className="flex items-center gap-2 text-primary-300 font-semibold text-sm underline"
             >
               <Image
@@ -199,7 +199,6 @@ export default function Header() {
 
         {/* ===== MOBILE ===== */}
         <div className="flex items-center gap-s-3xl md:hidden">
-          {/* SEARCH ICON (SELALU ADA) */}
           <button
             onClick={() => {
               setIsMenuOpen(false);
@@ -215,7 +214,6 @@ export default function Header() {
             />
           </button>
 
-          {/* BEFORE LOGIN → MENU */}
           {!token && (
             <button
               onClick={() => {
@@ -235,7 +233,6 @@ export default function Header() {
             </button>
           )}
 
-          {/* AFTER LOGIN → AVATAR */}
           {token && (
             <button
               type="button"

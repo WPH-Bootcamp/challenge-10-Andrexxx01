@@ -155,7 +155,6 @@ export default function CommentsSection({ postId }: Props) {
 
       {error && <p className="mt-2 text-xs text-red-500">{error}</p>}
 
-      {/* DESKTOP: kanan | MOBILE: full */}
       <div className="mt-4 flex justify-end">
         <Button
           onClick={() => postMutation.mutate()}
